@@ -28,22 +28,22 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         file = sys.argv[1]
 
-    cap = cv2.VideoCapture(file)
+    # cap = cv2.VideoCapture(file)
 
     #cap = cv2.VideoCapture(0)
     #cap = cv2.VideoCapture('/Users/matto/Stitch tmp2/IMG_0565_2.mp4')
-    #cap = cv2.VideoCapture('/Users/matto/Downloads/shijokiyamachi.mp4')
-    #cap = cv2.VideoCapture('/Users/matto/Downloads/shibuya.mp4')
+    # cap = cv2.VideoCapture('/Users/matto/Downloads/shijokiyamachi.mp4')
+    # cap = cv2.VideoCapture('/Users/matto/Downloads/shibuya.mp4')
     #cap = cv2.VideoCapture('/Users/matto/Downloads/littleitaly.mp4')
-    #cap = cv2.VideoCapture('/Users/matto/Downloads/akiba.mp4')
-    #cap = cv2.VideoCapture('/Users/matto/Downloads/akiba2.mov')
+    cap = cv2.VideoCapture('/Users/matto/Downloads/akiba.mp4')
+    # cap = cv2.VideoCapture('/Users/matto/Downloads/akiba2.mov')
     #cap = cv2.VideoCapture('/Users/matto/Movies/iMovie Events.localized/SlitCam 2013-11-12/clip-2013-11-12 14;07;39.mov')
-    #cap = cv2.VideoCapture('/Users/matto/Downloads/shibuya2.mp4')
+    # cap = cv2.VideoCapture('/Users/matto/Downloads/shibuya2.mp4')
     #https://www.youtube.com/watch?v=kw3MEiTKbpk
     ret, frame = cap.read()
-    fgbg = cv2.createBackgroundSubtractorMOG2()
-    #fgbg = cv2.createBackgroundSubtractorMOG2(detectShadows=False)
-    #fgbg = cv2.BackgroundSubtractorMOG(detectShadows=False)
+    # fgbg = cv2.createBackgroundSubtractorMOG2()
+    fgbg = cv2.createBackgroundSubtractorMOG2(detectShadows=False, varThreshold=64)
+    # fgbg = cv2.createBackgroundSubtractorMOG(detectShadows=False)
 
     #make a deep picture stack
     accum = 50
@@ -59,14 +59,14 @@ if __name__ == '__main__':
     #success = vout.open('motion720p.mov',fourcc,fps,capSize,True)
     nframe = 0
     while True:
-        for i in range(1):
+        for i in range(5):
             ret, frame = cap.read()
         #print ret
         if not ret:
             break
         # 動体のマスク画像を取得
         cv2.imshow("Input",frame)
-        key = cv2.waitKey(0)
+        # key = cv2.waitKey(0)
         fgmask = fgbg.apply(frame)
         # ゴマ塩ノイズ除去
         fgmask = cv2.medianBlur(fgmask,7)

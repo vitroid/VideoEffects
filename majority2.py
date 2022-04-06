@@ -1,4 +1,4 @@
-#!/usr/bin/python2.7
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #動くものを撮影することを拒否するカメラ。
 
@@ -55,7 +55,7 @@ if __name__ == '__main__':
     #vout = cv2.VideoWriter()
     #success = vout.open('majority.mov',fourcc,fps,capSize,True)
     nframe = 0
-    lasttime = time.clock()
+    lasttime = time.time()
     while True:
         for i in range(10):
             ret, frame = cap.read()
@@ -78,7 +78,7 @@ if __name__ == '__main__':
         # 各画像の表示
         #cv2.imshow("Input",frame)
         #cv2.imshow("Motion Mask",masked)
-        now = time.clock()
+        now = time.time()
         duration,lasttime = now - lasttime, now
         print("{} sec.".format(duration))
         cv2.imshow("Majority",majority)

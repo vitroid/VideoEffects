@@ -1,14 +1,20 @@
-#!/usr/local/bin/python2.7
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#動くものを撮影することを拒否するカメラ。
+#動くものにあふれるカメラ。
 
 import numpy as np
 import cv2
+import sys
 
-cap = cv2.VideoCapture('vtest.avi')
+file = 0
+if len(sys.argv) > 1:
+    file = sys.argv[1]
+
+cap = cv2.VideoCapture(file)
+# cap = cv2.VideoCapture('vtest.avi')
 
 kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
-fgbg = cv2.createBackgroundSubtractorGMG()
+fgbg = cv2.createBackgroundSubtractorMOG2(detectShadows = False)
 
 while(1):
     ret, frame = cap.read()
