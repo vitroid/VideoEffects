@@ -3,3 +3,4 @@
 *.mov
 old/*
 *.avi
+poetry.lock
